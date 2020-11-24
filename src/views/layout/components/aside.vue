@@ -1,10 +1,12 @@
 <template>
     <el-menu
       default-active="/"
-      background-color="rgb(0,32,51)"
+      background-color="#002033"
       text-color="#fff"
       active-text-color="#ffd04b"
       router
+      :collapse="isCollapse"
+      :collapse-transition = false
     >
     <!-- active-text-color 选中时的颜色   rgb(#001A29)-->
     <!-- text-color 字体的颜色 -->
@@ -43,9 +45,11 @@
 export default {
   name: "AppAside",
   components: {},
-  props: {},
+  props: ['is-collapse'],
   data() {
-    return {};
+    return {
+      // isCollapse:true
+    };
   },
   computed: {},
   watch: {},
@@ -60,4 +64,12 @@ export default {
   margin-right: 10px;
   padding-left: 5px;
 }
+.el-menu-item{
+  padding-right:30px;
+}
+
+/* 强行给模板元素加样式：1.在类标签前加/deep/，或者加>,如下 */
+/* .el-menu-item>:hover{
+      background-color: red;
+    } */
 </style>

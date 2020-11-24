@@ -103,6 +103,8 @@ export default {
             message: '登录成功',
             type: 'success'
           });
+          //本地存储字符串，只能存储字符串
+          window.localStorage.setItem('user',JSON.stringify(res.data.data))
           // console.log(res)
           //跳转到首页
           // this.$router.push('/') //根据路径进行跳转

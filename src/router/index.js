@@ -5,9 +5,10 @@ import Login from '@/views/login/index.vue'
 import Test from '@/views/test/test.vue'
 import Home from '@/views/home'
 import Layout from '@/views/layout'
+import Article from '@/views/article'
 Vue.use(Router)
-export default new Router({
-  routes: [
+
+const  routes = [
     {
       path: '/login',
       name: 'login',
@@ -22,6 +23,11 @@ export default new Router({
           name: 'home',
           component: Home
         },
+        {
+          path: '/article',
+          name: 'article',
+          component: Article
+        }
       ]
     },
 
@@ -31,4 +37,27 @@ export default new Router({
       component: Test
     }
   ]
+const router = new Router({
+  routes
 })
+//导航守卫 所有页面都经过它
+//to :要跳转的页面
+//from： 从哪个页面跳转而来
+//next： 放行的方法 next()
+router.beforeEach((to, from, next) => {
+  console.log('to:',to)
+  console.log('from:',from)
+  const user = JSON.parse(window.localStorage.getItem('user'))
+  if(to.path !== '/login'){
+    if(user){
+      //已登录，放行
+      next()
+    }else{
+      next('/login') //未登录，重定向到登录
+    }
+  }else{
+    next()//登录页面放行
+  }
+
+})
+export default router
